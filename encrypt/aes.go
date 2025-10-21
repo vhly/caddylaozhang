@@ -119,11 +119,15 @@ func (m ResponseAesEncryptor) ServeHTTP(w http.ResponseWriter, r *http.Request, 
 		statusCode:     http.StatusOK,
 	}
 
+	m.logger.Debug("ResponseAesEncryptor ServeHTTP prepare response")
+
 	// 执行下一个处理器
 	err := next.ServeHTTP(rec, r)
 	if err != nil {
 		return err
 	}
+
+	m.logger.Debug("ResponseAesEncryptor ServeHTTP encrypt start")
 
 	// 加密响应体
 	encryptedData, err := m.encryptData(rec.body)
