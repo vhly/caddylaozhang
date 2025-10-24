@@ -105,6 +105,9 @@ func (m *ResponseAesEncryptor) Validate() error {
 
 // ServeHTTP 实现中间件逻辑
 func (m ResponseAesEncryptor) ServeHTTP(w http.ResponseWriter, r *http.Request, next caddyhttp.Handler) error {
+
+	m.logger.Debug("ResponseAesEncryptor ServeHTTP checkShouldEncrypt", zap.String("path", r.URL.Path))
+
 	// 检查是否需要加密该路径
 	if !m.shouldEncrypt(r.URL.Path) {
 		return next.ServeHTTP(w, r)
