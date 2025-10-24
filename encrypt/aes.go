@@ -13,24 +13,22 @@ import (
 
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
-	"github.com/caddyserver/caddy/v2/caddyconfig/httpcaddyfile"
 	"github.com/caddyserver/caddy/v2/modules/caddyhttp"
 	"go.uber.org/zap"
 )
 
 func init() {
 	caddy.RegisterModule(ResponseAesEncryptor{})
-	httpcaddyfile.RegisterHandlerDirective("response_aesencryptor", parseCaddyfile)
 }
 
-// parseCaddyfile sets up the log_append handler from Caddyfile tokens. Syntax:
-//
-//	log_append [<matcher>] <key> <value>
-func parseCaddyfile(h httpcaddyfile.Helper) (caddyhttp.MiddlewareHandler, error) {
-	handler := new(ResponseAesEncryptor)
-	err := handler.UnmarshalCaddyfile(h.Dispenser)
-	return handler, err
-}
+// // parseCaddyfile sets up the log_append handler from Caddyfile tokens. Syntax:
+// //
+// //	log_append [<matcher>] <key> <value>
+// func parseCaddyfile(h httpcaddyfile.Helper) (caddyhttp.MiddlewareHandler, error) {
+// 	handler := new(ResponseAesEncryptor)
+// 	err := handler.UnmarshalCaddyfile(h.Dispenser)
+// 	return handler, err
+// }
 
 // ResponseEncryptor 实现HTTP响应体加密的中间件
 type ResponseAesEncryptor struct {
