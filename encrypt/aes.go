@@ -67,6 +67,8 @@ func (ResponseAesEncryptor) CaddyModule() caddy.ModuleInfo {
 func (m *ResponseAesEncryptor) Provision(ctx caddy.Context) error {
 	m.logger = ctx.Logger(m)
 
+	m.EncryptAll = true
+
 	// 解码base64密钥
 	if m.Key != "" {
 		var err error
